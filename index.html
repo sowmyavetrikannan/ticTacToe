@@ -1,0 +1,31 @@
+<script src="js/angular.min.js"></script>
+<script src="js/ticTacToeController.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script> 
+<link rel="stylesheet" type="text/css" href="css/ticTacToe.css"></link>
+
+
+
+<div ng-app="ticTacToeApp" class="ng-cloak" ng-cloak="">
+   <div ng-controller="ticTacToeController">
+     <h2>Tic Tac Toe</h2>
+     <div class="info">       
+       <label>Board Size</label>
+       <input type="number" required=true class="label-margin text-center" ng-model="initBoardSize" ng-change="updateNewNumberToWin()" />
+       <br/>
+       <label>How many in a row to win?</label>       
+       <label class="label-margin">{{initNumberToWin}}</label>
+<br/>
+       <button ng-click="newGame($event);">New Game</button>
+       <p ng-show="errors">{{errors}}</p>       
+     </div>
+     
+      <div class="board">
+        <p ng-show="!winner && !draw">{{currentPlayer}}'s turn</p>
+        <p ng-show="winner" class="won">{{currentPlayer}} WON</p>
+        <p ng-show="draw">DRAW</p>
+        <div ng-repeat="positionInfo in board" class="square" ng-click="playTurn($event, positionInfo)" ng-class="{'touched': !($index % boardsize)}"> 
+          {{positionInfo.player}}
+        </div>   
+      </div>
+  </div>  
+</div>
